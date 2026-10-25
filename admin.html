@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - SHASAN DRIP CO</title>
+  <style>
+    :root{
+      --bg:#0b0c0f;
+      --panel:#161a1f;
+      --panel2:#1b2128;
+      --text:#f7f3ee;
+      --muted:#c6c0b6;
+      --gold:#d6b06c;
+      --gold2:#f4d38b;
+      --line:rgba(255,255,255,.08);
+      --danger:#ff865e;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+      background:linear-gradient(180deg,#0a0b0d,#12161b);
+      color:var(--text);
+    }
+
+    a{text-decoration:none;color:inherit}
+    button,input,textarea{font:inherit}
+    .container{width:min(1100px,92%);margin:0 auto}
+
+    .topbar{
+      background:rgba(8,9,12,.72);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:18px 0;
+    }
+
+    .topbar-inner{
+      display:flex;justify-content:space-between;align-items:center;gap:16px;
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    }
+
+    .brand-mark{
+      width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;font-weight:900;
+    }
+
+    .actions{display:flex;gap:12px}
+    .btn{
+      border:none;cursor:pointer;border-radius:12px;padding:12px 16px;font-weight:700;
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;
+    }
+    .btn.secondary{
+      background:transparent;color:var(--text);border:1px solid var(--line);
+    }
+    .btn.danger{
+      background:rgba(255,134,94,.12);color:#ffb39a;border:1px solid rgba(255,134,94,.35);
+    }
+
+    .panel{
+      margin:28px auto;background:rgba(255,255,255,.03);
+      border:1px solid var(--line);border-radius:22px;padding:22px;
+      box-shadow:0 24px 32px rgba(0,0,0,.18);
+    }
+
+    .admin-layout{
+      display:grid;grid-template-columns:1fr 1.3fr;gap:20px;
+    }
+
+    .section-title{
+      margin:0 0 18px;font-size:1.4rem;
+    }
+
+    .field{display:grid;gap:8px;margin-bottom:12px}
+    .field label{
+      font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    }
+    .field input,.field textarea{
+      width:100%;padding:12px 14px;border-radius:10px;
+      background:rgba(255,255,255,.03);color:var(--text);
+      border:1px solid var(--line);outline:none;
+    }
+    .field textarea{min-height:90px;resize:vertical}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .product-list{display:grid;gap:12px;margin-top:16px}
+    .product-item{
+      display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;
+      background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:10px;
+    }
+    .product-item img{width:72px;height:86px;object-fit:cover;border-radius:10px}
+    .product-item h4{margin:0 0 6px;font-size:.98rem}
+    .product-item p{margin:0;color:var(--muted);font-size:.82rem}
+    .mini-actions{display:flex;flex-direction:column;gap:8px}
+    .small-btn{
+      border:none;padding:9px 12px;border-radius:10px;cursor:pointer;
+      background:rgba(255,255,255,.04);color:var(--text);border:1px solid var(--line);
+    }
+    .small-btn.danger{
+      background:rgba(255,134,94,.12);color:#ffb39a;border-color:rgba(255,134,94,.35);
+    }
+
+    @media (max-width:840px){
+      .admin-layout{grid-template-columns:1fr}
+      .topbar-inner{flex-wrap:wrap}
+    }
+    @media (max-width:560px){
+      .two-col{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" id="logoText">S</div>
+        <span id="shopName">SHASAN DRIP CO</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn secondary" id="customerBtn">Customer Page</button>
+        <button class="btn primary" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="panel">
+      <div class="admin-layout">
+        <section>
+          <h2 class="section-title">Shop Settings</h2>
+
+          <form id="settingsForm">
+            <div class="field">
+              <label>Shop Name</label>
+              <input type="text" id="shopNameInput" value="SHASAN DRIP CO" />
+            </div>
+
+            <div class="field">
+              <label>Logo Letter</label>
+              <input type="text" id="logoTextInput" maxlength="2" value="S" />
+            </div>
+
+            <div class="field">
+              <label>Hero Title</label>
+              <input type="text" id="heroTitleInput" value="Luxury streetwear from SHASAN DRIP CO" />
+            </div>
+
+            <div class="field">
+              <label>Hero Message</label>
+              <textarea id="heroTextInput">Discover elegant, modern, and statement pieces designed for confidence, comfort, and style.</textarea>
+            </div>
+
+            <button type="submit" class="btn primary" style="width:100%;">Save Settings</button>
+          </form>
+        </section>
+
+        <section>
+          <h2 class="section-title">Add / Edit Product</h2>
+
+          <form id="productForm">
+            <div class="field">
+              <label>Product Name</label>
+              <input type="text" id="productName" required />
+            </div>
+
+            <div class="two-col">
+              <div class="field">
+                <label>Price (LKR)</label>
+                <input type="number" id="productPrice" min="0" required />
+              </div>
+
+              <div class="field">
+                <label>Category</label>
+                <input type="text" id="productCategory" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Image URL</label>
+              <input type="url" id="productImage" required />
+            </div>
+
+            <div class="field">
+              <label>Description</label>
+              <textarea id="productDescription" required></textarea>
+            </div>
+
+            <div style="display:flex;gap:10px;justify-content:space-between;">
+              <button type="submit" class="btn primary" id="saveProductBtn">Add Product</button>
+              <button type="button" class="btn secondary" id="clearFormBtn">Clear</button>
+            </div>
+          </form>
+
+          <div class="product-list" id="productList"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORE_KEY = "shasanDripStore";
+    const ADMIN_PASSWORD = "admin123";
+
+    const defaultStore = {
+      shopName: "SHASAN DRIP CO",
+      logoText: "S",
+      heroTitle: "Luxury streetwear from SHASAN DRIP CO",
+      heroText: "Discover elegant, modern, and statement pieces designed for confidence, comfort, and style.",
+      products: [
+        {
+          id: 1,
+          name: "Midnight Luxe Dress",
+          category: "Luxury",
+          price: 3999,
+          image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80",
+          description: "Elegant premium look for nights out and stylish evenings."
+        },
+        {
+          id: 2,
+          name: "Velvet Winner Set",
+          category: "Designer",
+          price: 4499,
+          image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+          description: "Soft texture, modern fit, perfect for confident appearances."
+        },
+        {
+          id: 3,
+          name: "Drip Classic Fit",
+          category: "Classic",
+          price: 3599,
+          image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80",
+          description: "A timeless everyday dress with a rich, effortless style."
+        }
+      ]
+    };
+
+    let store = loadStore();
+    let editingProductId = null;
+
+    function loadStore(){
+      const saved = localStorage.getItem(STORE_KEY);
+      if(saved){
+        try{return JSON.parse(saved);} catch {return defaultStore;}
+      }
+      return defaultStore;
+    }
+
+    function saveStore(){
+      localStorage.setItem(STORE_KEY, JSON.stringify(store));
+    }
+
+    function formatPrice(value){
+      return "LKR " + Number(value).toLocaleString("en-LK",{minimumFractionDigits:2, maximumFractionDigits:2});
+    }
+
+    function renderHeader(){
+      document.getElementById("shopName").textContent = store.shopName;
+      document.getElementById("logoText").textContent = (store.logoText || "S").slice(0,2);
+      document.getElementById("shopNameInput").value = store.shopName;
+      document.getElementById("logoTextInput").value = store.logoText;
+      document.getElementById("heroTitleInput").value = store.heroTitle;
+      document.getElementById("heroTextInput").value = store.heroText;
+    }
+
+    function renderProductList(){
+      const list = document.getElementById("productList");
+      list.innerHTML = "";
+
+      store.products.forEach(product => {
+        const item = document.createElement("div");
+        item.className = "product-item";
+        item.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" />
+          <div>
+            <h4>${product.name}</h4>
+            <p>${formatPrice(product.price)} • ${product.category || "Fashion"}</p>
+          </div>
+          <div class="mini-actions">
+            <button class="small-btn" data-action="edit" data-id="${product.id}">Edit</button>
+            <button class="small-btn danger" data-action="delete" data-id="${product.id}">Delete</button>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function clearProductForm(){
+      editingProductId = null;
+      document.getElementById("productForm").reset();
+      document.getElementById("saveProductBtn").textContent = "Add Product";
+    }
+
+    function fillEditForm(product){
+      editingProductId = product.id;
+      document.getElementById("productName").value = product.name;
+      document.getElementById("productPrice").value = product.price;
+      document.getElementById("productCategory").value = product.category || "";
+      document.getElementById("productImage").value = product.image;
+      document.getElementById("productDescription").value = product.description;
+      document.getElementById("saveProductBtn").textContent = "Update Product";
+    }
+
+    function handleSettingsSubmit(e){
+      e.preventDefault();
+      store.shopName = document.getElementById("shopNameInput").value.trim() || "SHASAN DRIP CO";
+      store.logoText = document.getElementById("logoTextInput").value.trim() || "S";
+      store.heroTitle = document.getElementById("heroTitleInput").value.trim() || "Luxury streetwear from SHASAN DRIP CO";
+      store.heroText = document.getElementById("heroTextInput").value.trim() || "Discover elegant, modern, and statement pieces designed for confidence, comfort, and style.";
+
+      saveStore();
+      renderHeader();
+      alert("Shop settings saved.");
+    }
+
+    function handleProductSubmit(e){
+      e.preventDefault();
+
+      const product = {
+        id: editingProductId || Date.now(),
+        name: document.getElementById("productName").value.trim(),
+        category: document.getElementById("productCategory").value.trim() || "Fashion",
+        price: Number(document.getElementById("productPrice").value),
+        image: document.getElementById("productImage").value.trim(),
+        description: document.getElementById("productDescription").value.trim()
+      };
+
+      if(!product.name || !product.image || !product.description || !product.price){
+        alert("Please complete all required fields.");
+        return;
+      }
+
+      if(editingProductId){
+        const idx = store.products.findIndex(item => item.id === editingProductId);
+        if(idx !== -1) store.products[idx] = product;
+      } else {
+        store.products.unshift(product);
+      }
+
+      saveStore();
+      renderProductList();
+      clearProductForm();
+      alert(editingProductId ? "Product updated." : "Product added.");
+    }
+
+    function deleteProduct(id){
+      const ok = confirm("Delete this dress?");
+      if(!ok) return;
+
+      store.products = store.products.filter(item => item.id !== Number(id));
+      saveStore();
+      renderProductList();
+
+      if(editingProductId === Number(id)) clearProductForm();
+    }
+
+    function requireAdminLogin(){
+      const entered = prompt("Enter admin password:");
+      if(entered === ADMIN_PASSWORD) return true;
+
+      if(entered !== null) alert("Incorrect admin password.");
+      window.location.href = "index.html";
+      return false;
+    }
+
+    document.getElementById("settingsForm").addEventListener("submit", handleSettingsSubmit);
+    document.getElementById("productForm").addEventListener("submit", handleProductSubmit);
+    document.getElementById("clearFormBtn").addEventListener("click", clearProductForm);
+    document.getElementById("customerBtn").addEventListener("click", () => window.location.href = "index.html");
+    document.getElementById("logoutBtn").addEventListener("click", () => window.location.href = "index.html");
+
+    document.addEventListener("click", function(event){
+      const actionBtn = event.target.closest("[data-action]");
+      if(actionBtn){
+        const action = actionBtn.dataset.action;
+        const id = Number(actionBtn.dataset.id);
+
+        if(action === "edit"){
+          const product = store.products.find(item => item.id === id);
+          if(product) fillEditForm(product);
+        }
+
+        if(action === "delete"){
+          deleteProduct(id);
+        }
+      }
+    });
+
+    if(!requireAdminLogin()) throw new Error("Admin login required.");
+
+    renderHeader();
+    renderProductList();
+  </script>
+</body>
+</html>
